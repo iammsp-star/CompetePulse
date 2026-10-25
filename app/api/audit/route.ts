@@ -17,7 +17,7 @@ export async function POST(request: Request) {
 
     let formattedUrl = url.trim();
     if (!/^https?:\/\//i.test(formattedUrl)) {
-      formattedUrl = https://;
+      formattedUrl = "https://" + formattedUrl;
     }
 
     // 1. Scrape the user's URL using Firecrawl
@@ -164,3 +164,4 @@ Perform a comprehensive competitive gap analysis. Identify weaknesses where comp
     );
   }
 }
+
