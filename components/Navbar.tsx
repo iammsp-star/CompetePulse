@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   Radar,
   Plus,
@@ -8,7 +10,8 @@ import {
   Flame,
   Sparkles,
   RefreshCw,
-  ExternalLink,
+  ShieldAlert,
+  LayoutDashboard,
 } from "lucide-react";
 
 interface NavbarProps {
@@ -19,6 +22,7 @@ interface NavbarProps {
 
 export function Navbar({ onOpenAddModal, onRefreshAll, isRefreshing }: NavbarProps) {
   const [isDark, setIsDark] = useState(true);
+  const pathname = usePathname();
   const [systemStatus, setSystemStatus] = useState<{
     supabase: boolean;
     firecrawl: boolean;
@@ -53,6 +57,9 @@ export function Navbar({ onOpenAddModal, onRefreshAll, isRefreshing }: NavbarPro
     }
   };
 
+  const isAuditPage = pathname === "/audit";
+  const isDashboard = pathname === "/";
+
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border bg-card/80 backdrop-blur-md transition-colors">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -79,6 +86,37 @@ export function Navbar({ onOpenAddModal, onRefreshAll, isRefreshing }: NavbarPro
             </p>
           </div>
         </div>
+
+        {/* Nav Links */}
+        <nav className="hidden items-center space-x-1 md:flex">
+          <Link
+            href="/"
+            className={`flex items-center space-x-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all ${
+              isDashboard
+                ? "bg-indigo-500/10 text-indigo-500 border border-indigo-500/20"
+                : "text-muted-foreground hover:text-foreground hover:bg-muted"
+            }`}
+          >
+            <LayoutDashboard className="h-3.5 w-3.5" />
+            <span>Dashboard</span>
+          </Link>
+          <Link
+            href="/audit"
+            className={`flex items-center space-x-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all ${
+              isAuditPage
+                ? "bg-amber-500/10 text-amber-500 border border-amber-500/20"
+                : "text-muted-foreground hover:text-foreground hover:bg-muted"
+            }`}
+          >
+            <ShieldAlert className="h-3.5 w-3.5" />
+            <span>My Site Audit</span>
+            {!isAuditPage && (
+              <span className="rounded-full bg-amber-500/10 px-1.5 py-0.5 text-[10px] font-bold text-amber-500 border border-amber-500/20">
+                NEW
+              </span>
+            )}
+          </Link>
+        </nav>
 
         {/* Integration Status Badges */}
         <div className="hidden items-center space-x-2 lg:flex">
@@ -141,7 +179,32 @@ export function Navbar({ onOpenAddModal, onRefreshAll, isRefreshing }: NavbarPro
           </button>
         </div>
       </div>
+
+      {/* Mobile nav strip */}
+      <div className="flex items-center space-x-1 border-t border-border px-4 py-2 md:hidden">
+        <Link
+          href="/"
+          className={`flex items-center space-x-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all ${
+            isDashboard
+              ? "bg-indigo-500/10 text-indigo-500"
+              : "text-muted-foreground"
+          }`}
+        >
+          <LayoutDashboard className="h-3.5 w-3.5" />
+          <span>Dashboard</span>
+        </Link>
+        <Link
+          href="/audit"
+          className={`flex items-center space-x-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all ${
+            isAuditPage
+              ? "bg-amber-500/10 text-amber-500"
+              : "text-muted-foreground"
+          }`}
+        >
+          <ShieldAlert className="h-3.5 w-3.5" />
+          <span>My Site Audit</span>
+        </Link>
+      </div>
     </header>
   );
 }
-
