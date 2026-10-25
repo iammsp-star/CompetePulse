@@ -1,15 +1,15 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import { ToastProvider } from './components/Toast';
-import { AskPage } from './pages/Ask';
-import { CompetitorDetailPage } from './pages/CompetitorDetail';
-import { CompetitorsPage } from './pages/Competitors';
-import { DigestPage } from './pages/Digest';
-import { FeedPage } from './pages/Feed';
-import { MatrixPage } from './pages/Matrix';
-import { NotFoundPage } from './pages/NotFound';
-import { OverviewPage } from './pages/Overview';
-import { SettingsPage } from './pages/Settings';
+import { AskPage } from './views/Ask';
+import { CompetitorDetailPage } from './views/CompetitorDetail';
+import { CompetitorsPage } from './views/Competitors';
+import { DigestPage } from './views/Digest';
+import { FeedPage } from './views/Feed';
+import { MatrixPage } from './views/Matrix';
+import { NotFoundPage } from './views/NotFound';
+import { OverviewPage } from './views/Overview';
+import { SettingsPage } from './views/Settings';
 
 export default function App() {
   return (

@@ -1,6 +1,9 @@
 node_modules/
+.next/
+out/
 dist/
 data/
+*.tsbuildinfo
 .env
 .env.*
 !.env.example

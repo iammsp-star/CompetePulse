@@ -49,7 +49,7 @@ export async function POST(request: Request) {
       try {
         const openai = new OpenAI({ apiKey: openAiKey });
 
-        const systemPrompt = You are an expert competitive intelligence analyst specializing in gap analysis.
+        const systemPrompt = `You are an expert competitive intelligence analyst specializing in gap analysis.
 Your task is to compare a user's website against tracked competitors and identify weaknesses and strengths.
 
 OUTPUT FORMAT REQUIREMENTS:
@@ -70,7 +70,7 @@ You MUST respond with valid JSON matching this exact schema:
   ]
 }
 
-Provide 3-5 weaknesses and 2-4 strengths. Be specific and actionable.;
+Provide 3-5 weaknesses and 2-4 strengths. Be specific and actionable.`;
 
         const insightSummary = insights.slice(0, 5).map(i => ({
           competitor: i.competitor_name,
@@ -79,19 +79,19 @@ Provide 3-5 weaknesses and 2-4 strengths. Be specific and actionable.;
           summary: i.summary
         }));
 
-        const userPrompt = Analyze this website against competitors:
+        const userPrompt = `Analyze this website against competitors:
 
-USER WEBSITE: 
+USER WEBSITE: ${formattedUrl}
 USER SITE CONTENT:
-
+${userScrapeResult.markdown?.slice(0, 3000) || "No scrape content available"}
 
 TRACKED COMPETITORS:
-
+${JSON.stringify(competitorData, null, 2)}
 
 RECENT COMPETITOR INSIGHTS:
+${JSON.stringify(insightSummary, null, 2)}
 
-
-Perform a comprehensive competitive gap analysis. Identify weaknesses where competitors have advantages, and strengths where the user site excels.;
+Perform a comprehensive competitive gap analysis. Identify weaknesses where competitors have advantages, and strengths where the user site excels.`;
 
         const response = await openai.chat.completions.create({
           model: "gpt-4o",
