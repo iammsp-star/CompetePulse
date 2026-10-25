@@ -1,0 +1,48 @@
+{
+  "name": "competepulse",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "AI competitor research and intelligence platform",
+  "scripts": {
+    "dev": "node ./node_modules/next/dist/bin/next dev",
+    "build": "node ./node_modules/next/dist/bin/next build",
+    "start": "node ./node_modules/next/dist/bin/next start",
+    "typecheck": "node ./node_modules/typescript/bin/tsc --noEmit"
+  },
+  "dependencies": {
+    "@mendable/firecrawl-js": "^4.50.0",
+    "@supabase/supabase-js": "^2.118.0",
+    "cheerio": "^1.0.0",
+    "clsx": "^2.1.1",
+    "diff": "^9.0.0",
+    "dompurify": "^3.4.17",
+    "express": "^4.21.2",
+    "lucide-react": "^0.468.0",
+    "marked": "^15.0.6",
+    "next": "^14.2.24",
+    "node-cron": "^3.0.3",
+    "openai": "^7.39.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.1",
+    "tailwind-merge": "^3.7.0",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/diff": "^7.0.2",
+    "@types/express": "^4.17.21",
+    "@types/node": "^24.19.2",
+    "@types/node-cron": "^3.0.11",
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.6.1",
+    "postcss": "^8.5.31",
+    "puppeteer-core": "^25.14.0",
+    "tailwindcss": "^3.4.19",
+    "tsx": "^4.19.2",
+    "typescript": "^5.9.3",
+    "vite": "^6.0.7"
+  }
+}
